@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Update Task - Todo Lists  {% endblock title %}
+
+{% block body %}
+    
+    
+    
+        <div class="container my-3">
+        <form class="form-inline my-2 my-lg-0" method="POST" action="">
+            {% csrf_token %}
+            
+            {{form}}
+
+            
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="{{ item.taskTitle }}" value="{{ item.taskTitle}}" aria-label="Search" name="item_title">
+
+            <input class="form-control mr-sm-2" type="search" placeholder="{{ item.taskDesc }}" value="{{ item.taskDesc}}" aria-label="Search" name="item_desc">
+
+            <input type="hidden"  value="{{item.completed}}"  name="item_status">  -->
+
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="update_item">Edit Item</button>
+        </form>
+        </div>
+   
+{% endblock body %} 

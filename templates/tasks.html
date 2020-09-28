@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+
+
+
+{% block title %}Task - Todo Lists {% endblock title %}
+{% block taskactive %} active {% endblock taskactive %}
+{% block search %}
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+{% endblock search%}
+
+{% block body %}
+{% if messages %}
+<!--{% for message in messages %}-->
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <!--<strong>Hello!</strong> Form submitted : {{success}}-->
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    
+  </div>
+<!--{% endfor %}-->
+{% endif %}
+    <h2 class="text-center text-primary my-3 ">ToDos List Tasks</h2>
+    <div class="container bg-dark text-light my-3">
+
+        <table id="table_id" class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task Title</th>
+                <th scope="col">Task Description</th>
+                <th scope="col">Task Status </th>
+                <th scope="col">Task Time</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
+                
+                
+              </tr>
+            </thead>
+            
+            <tbody>
+            {% comment %}Run a for loop here and iterate through all the tasks {% endcomment %}
+            {% for task in tasks %}
+              {% if task.taskCompleted %}
+                <tr >
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td class="striker" name="title" id="title" >{{task.taskTitle}}</td>
+                  <td class="striker" name="desc" id="desc" >{{task.taskDesc}}</td>
+                  <td ><a href="{% url 'uncross' task.id %}">Uncross</a></td>
+                  <td class="striker">{{task.taskTime}}</td>
+                  <td><a href="{% url 'delete' task.id %}">Delete</a></td>
+                  <td><a href="{% url 'update' task.id %}">Update</a></td>
+                  <!--<td>{{task.taskCompleted}}</td>-->
+                  
+                
+                </tr>
+              
+              {% else %}
+               <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td>{{task.taskTitle}}</td>
+                  <td>{{task.taskDesc}}</td>
+                  <td><a href="{% url 'cross_off' task.id %}">Cross Off</a></td>
+                  <td>{{task.taskTime}}</td>
+                  <td><a href="{% url 'delete' task.id %}">Delete</a></td>
+                  <td><a href="{% url 'update' task.id %}">Update</a></td>
+                  <!--<td>{{task.taskCompleted}}</td>-->
+                
+                </tr>
+              
+              {% endif %}
+
+            {% endfor %}
+            </tbody>
+          </table>
+
+    </div>
+
+    {% endblock body %}
+    
+    
+
+
+
+ 
